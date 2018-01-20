@@ -22,6 +22,8 @@ int find_kth_element(int a[], int m, int b[], int n, int k) {
     else if (Ai_1 < Bj && Bj < Ai)
         return Bj;
 
+    // 这里由于传入find_kth_element()函数的指针以及变成 a+i+1，所以讲数组长度限定为 m-i，
+    // k变为 k-i，可自行画图理解（最重要的是理解函数传入的是指针，如 main（）函数中传入的 a，其实传入的也是数组的头指针）
     if (Ai < Bj)
         return find_kth_element(a + i + 1, m - i - 1, b, j, k - i);
     else
