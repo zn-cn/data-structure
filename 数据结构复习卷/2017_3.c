@@ -8,10 +8,8 @@
 int is_index(int a[], int n)
 {
     for (int i = 0; i < n; ++i)
-    {
         if (a[i] == i)
             return 1;
-    }
     return 0;
 }
 
