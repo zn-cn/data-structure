@@ -14,17 +14,19 @@ int is_symmetric(BinTreeNode *root)
 {
     if (root == NULL)
         return 1;
-    if (root->left == NULL && root->right == NULL)
-        return 1;
-    // 前面已经判断过不会两个为空，那么这里只需判断一个为空即可返回 0
-    if (root->left == NULL || root->right == NULL)
-        return 0;
-    if (root->left->data == root->right->data)
-    {
-        return is_symmetric(root->left) && is_symmetric(root->right);
-    }
+    if (root->left == NULL)
+        if (root->right == NULL)
+            return 1;
+        else
+            return 0;
     else
-        return 0;
+        if (root->right == NULL)
+            return 0;
+        else
+            if (root->left->data == root->right->data)
+                return is_symmetric(root->left) && is_symmetric(root->right);
+            else
+                return 0;
 }
 
 int main(int argc, char const *argv[])
