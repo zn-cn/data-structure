@@ -12,19 +12,19 @@ int find_kth_element(int a[], int m, int b[], int n, int k) {
     int j = (k - 1) - i;
 
     // 防止超界
-    int Ai_1 = ((i == 0) ? INT_MIN : a[i - 1]);
-    int Bj_1 = ((j == 0) ? INT_MIN : b[j - 1]);
-    int Ai   = ((i == m) ? INT_MAX : a[i]);
-    int Bj   = ((j == n) ? INT_MAX : b[j]);
+    int A_i_1 = ((i == 0) ? INT_MIN : a[i - 1]);
+    int B_j_1 = ((j == 0) ? INT_MIN : b[j - 1]);
+    int A_i   = ((i == m) ? INT_MAX : a[i]);
+    int B_j   = ((j == n) ? INT_MAX : b[j]);
 
-    if (Bj_1 < Ai && Ai < Bj)
-        return Ai;
-    else if (Ai_1 < Bj && Bj < Ai)
-        return Bj;
+    if (B_j_1 < A_i && A_i < B_j)
+        return A_i;
+    else if (A_i_1 < B_j && B_j < A_i)
+        return B_j;
 
     // 这里由于传入find_kth_element()函数的指针以及变成 a+i+1，所以讲数组长度限定为 m-i，
     // k变为 k-i，可自行画图理解（最重要的是理解函数传入的是指针，如 main（）函数中传入的 a，其实传入的也是数组的头指针）
-    if (Ai < Bj)
+    if (A_i < B_j)
         return find_kth_element(a + i + 1, m - i - 1, b, j, k - i);
     else
         return find_kth_element(a, i, b + j + 1, n - j - 1, k - j);
