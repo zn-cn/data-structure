@@ -16,6 +16,6 @@ int get_tens_digit(int k, int n)
 
 int main(int argc, char const *argv[])
 {
-	printf("%d\n", get_tens_digit(3, 7));
+	printf("%d\n", get_tens_digit(3, 10));
 	return 0;
 }
