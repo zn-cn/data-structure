@@ -5,7 +5,9 @@
 已经按顺序排列的整型数组中找到总体上第k小的元素。要求时间复杂度为 O(log m + log n)。
  */
 
-int find_kth_element(int a[], int m, int b[], int n, int k) {
+// 有些许问题
+int find_kth_element_old(int a[], int m, int b[], int n, int k)
+{
 
     // 根据 数组a 和数组 b 的大小来按比例分配 i 和 j 的值
     int i = (int)((double)m / (m + n) * (k - 1));
@@ -28,6 +30,39 @@ int find_kth_element(int a[], int m, int b[], int n, int k) {
         return find_kth_element(a + i + 1, m - i - 1, b, j, k - i);
     else
         return find_kth_element(a, i, b + j + 1, n - j - 1, k - j);
+}
+
+// 新版先放着
+int find_kth_element(int *a, int m, int *b, int n, int k) {
+    if (m == 0)
+        return b[k - 1];
+
+    if (n == 0)
+        return a[k - 1];
+
+    if (k == 1)
+        return (a[0] < b[0]) ? a[0] : b[0];
+
+    if (k == m + n)
+        return (a[m - 1] > b[n - 1]) ? a[m - 1] : b[n - 1];
+
+    int i = ((double) m) / (m + n) * (k - 1);
+    int j = k - 1 - i;
+    if (j >= n)
+    {
+        j = n - 1;
+        i = k - n;
+    }
+    if (((i == 0) || (a[i - 1] <= b[j])) && (b[j] <= a[i]))
+        return b[j];
+    if (((j == 0) || (b[j - 1] <= a[i])) && (a[i] <= b[j]))
+        return a[i];
+    if (a[i] <= b[j])
+        return find_kth_element(a + i + 1, m - i - 1, b, j, k - i - 1);
+    else
+        return find_kth_element(a, i, b + j + 1, n - j - 1, k - j - 1);
+
+
 }
 
 int main(int argc, char const *argv[])
