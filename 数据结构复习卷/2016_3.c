@@ -30,7 +30,8 @@ void swap(int* a, int* b)
     *b = temp;
 }
 
-void move(int a[], int n)
+// 旧版
+void move1(int a[], int n)
 {
     int pivotIndex = find_pivot_index(a, n);
     int pivotValue = a[pivotIndex];
@@ -41,6 +42,29 @@ void move(int a[], int n)
         while (a[right] >= pivotValue && left < right)
             right--;
         swap(&a[left], &a[right]);
+    }
+}
+
+// 新版
+void move2(int a[], int n)
+{
+    int i = 0;
+    int j = n-1;
+    int tmp = 0;
+    while(1)
+    {
+        while(a[i] <= 0)
+            i++;
+        while(a[j] >= 0)
+            j--;
+        if (i < j)
+        {
+            tmp = a[i];
+            a[i] = a[j];
+            a[j] = tmp;
+        }
+        else
+            break;
     }
 }
 

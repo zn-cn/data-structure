@@ -10,27 +10,25 @@ typedef struct binTreeNode
     struct binTreeNode *right;
 } BinTreeNode;
 
+int symmetric(BinTreeNode *left, BinTreeNode *right)
+{
+    if (left == NULL && right == NULL)
+        return 1;
+    else
+        if (left == NULL || right == NULL)
+            return 0;
+        else
+            return (left->data == right->data) && symmetric(left->left, right->right) && symmetric(left->right, right->left);
+}
+
 int is_symmetric(BinTreeNode *root)
 {
     if (root == NULL)
         return 1;
-    if (root->left == NULL)
-        if (root->right == NULL)
-            return 1;
-        else
-            return 0;
-    else
-        if (root->right == NULL)
-            return 0;
-        else
-            if (root->left->data == root->right->data)
-                return is_symmetric(root->left) && is_symmetric(root->right);
-            else
-                return 0;
+    return symmetric(root->left, root->right);
 }
 
 int main(int argc, char const *argv[])
 {
-
     return 0;
 }
